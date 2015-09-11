@@ -1,27 +1,19 @@
-{# Right now, each widget is a panel, but you can really put whatever you want here #}
 <div class="panel panel-info">
 	<div class="panel-heading">
-		<h3 class="panel-title">Example Widget</h3>
+		<h3 class="panel-title">Difference between two Branches</h3>
 	</div>
 	<div class="panel-body">
-		<p>An example widget for you to see how things work</p>
-		<form id="example">
+		<p>Put in a branch and see the differences between that branch and another.</p>
+		<form id="compare_branch">
 			<div class="form-group">
-				<label for="auditSinceBranch">Argument 1</label>
-				{# The id should match the argument in Processor->run() #}
-				<input type="text" class="form-control" id="arg1" placeholder="arg1">
+				<label for="compareCommitsFrom">Commits on branch:</label>
+				<input type="text" class="form-control" id="compareCommitsFrom" placeholder="dev">
 			</div>
 			<div class="form-group">
-				<label for="commitRegex">Argument 2</label>
-				<input type="text" class="form-control" id="arg2" placeholder="arg2">
+				<label for="compareCommitsTo">That aren't on branch:</label>
+				<input type="text" class="form-control" id="compareCommitsTo" placeholder="master">
 			</div>
-			<div class="form-group">
-				<label for="auditSince">Optional Argument</label>
-				{# Optional arguemnts, if not filled out, will get the default value set in Processor->run() #}
-				<input type="text" class="form-control" id="optionalArg" placeholder="optionalArg">
-			</div>
-			{# The button to run the command needs the type="submit" attribute #}
-			<button type="submit" class="btn btn-primary btn-block">Run stuff</button>
+			<button type="submit" class="btn btn-primary btn-block">Compare</button>
 		</form>
 	</div>
 </div>
