@@ -1,40 +1,53 @@
 <?php
 /**
- * DESCRIPTION OF WHAT EXACTLY YOUR WIDGET DOES 
+ * Hotfix Audit looks for commits that are on production that aren't on the development branch. 
  * 
  * @package   GitFloat
- * @version   NUMBA
- * @author    YOUR NAME
+ * @version   1.0
+ * @author    Kevin Baugh
  */
 
-namespace AUTHOR\WIDGET_NAME;
+namespace Loraxx753\Hotfix_Audit;
 
 /**
- * Processes the commit audit request
+ * Processes the hotfix audit request
  */
 class Processor extends \GitFloat\Base_Processor {
 
-	/**
-	 * Constructs the proccessor.
-	 */
 	function __construct() {
-		// Examples 
-		// $this->use_github();
-		// $this->use_twig();
+		$this->use_github();
+		$this->use_twig();
 
 	}
 
 	/**
-	 * Runs the widget and presents results
+	 * Runs the hotfix audit request
+	 * @return string Twig response
 	 */
-	public function run($arg1, $arg2, $optionalArg = false) {
+	public function run() {
+	 	$result = $this->github->api('repos')->commits()->compare($_SESSION['organization'], $_SESSION['repo'], 'dev', 'master');
+		$commits = array();
+		foreach ($result['commits'] as $commit) {
+			$commits[] = $this->parse_commit($commit);
+		}
+		$result['commits'] = $commits;
 
-		return $this->twig->render('output.twig', 
-							array(
-								'argument1'        => $arg1,
-								'argument2'        => $arg2,
-								'optionalArgument' => $optionalArg
-								));
+		return $this->twig->render('hotfix_audit.twig', array(
+							'result' => $result));
 	}
-
+	/**
+	 * Makes the commits pretty
+	 * @param  array   $commit The contents of the commit
+	 * @return string          Twig response
+	 */
+	private function parse_commit($commit) {
+		$avatar = (isset($commit['author']['avatar_url'])) ? $commit['author']['avatar_url'] : "/assets/img/placeholder.jpg";
+		$heading = $commit['commit']['author']['name']." - ".date("m-d-Y @ h:i a", strtotime($commit['commit']['author']['date']));
+		$content = "<p>".$commit['commit']['message']."</p>";
+		
+		return $this->twig->render('bootstrap/media_object.twig', 
+							array('image'  => $avatar, 
+								  'heading' => $heading,
+								  'content' => $content));
+	}
 }

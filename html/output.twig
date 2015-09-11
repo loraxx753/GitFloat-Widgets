@@ -1,9 +1,10 @@
-{# Uses twig syntax for all html #}
-<div class="row">
-	<div class="col-md-12">
-		<h4>This is what would be in the output</h4>
-		<p>$arg1 = {{ argument1 }}</p>
-		<p>$arg2 = {{ argument2 }}</p>
-		<p>$optionalArg = {{ optionalArgument }}</p>
-	</div>
-</div>
+{% if result.ahead_by %}
+	<h3 class="text-center">There are <b>{{ result.ahead_by }}</b> hotfixes that are on production but haven't been merged into dev.</h3>
+	{% for commit in result.commits %}
+		{{ commit }}
+	{% endfor %}
+
+{% else %}
+	<p class="text-center"><img src="../assets/img/jake.gif"></p>
+	<p class="text-center">There are no commits that haven't been merged into dev.</p>
+{% endif %}
