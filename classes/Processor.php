@@ -7,7 +7,7 @@
  * @author    YOUR NAME
  */
 
-namespace AUTHOR\WIDGET_NAME;
+namespace Loraxx753\Test_Widget;
 
 /**
  * Processes the commit audit request
