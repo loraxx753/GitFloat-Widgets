@@ -7,7 +7,7 @@
  * @author    Kevin Baugh
  */
 
-namespace Loraxx753\Hotfix_Audit;
+namespace Loraxx753\Github\Hotfix_Audit;
 
 /**
  * Processes the hotfix audit request
