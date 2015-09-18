@@ -32,7 +32,7 @@ class Processor extends \GitFloat\Base_Processor {
 		}
 		$result['commits'] = $commits;
 
-		return $this->twig->render('hotfix_audit.twig', array(
+		return $this->twig->render('output.twig', array(
 							'result' => $result));
 	}
 	/**
