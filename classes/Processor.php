@@ -7,7 +7,7 @@
  * @author    Kevin Baugh
  */
 
-namespace Loraxx753\Commit_Audit;
+namespace Loraxx753\Github\Commit_Audit;
 
 /**
  * Processes the commit audit request
