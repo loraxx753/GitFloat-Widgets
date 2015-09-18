@@ -7,7 +7,7 @@
  * @author    Kevin Baugh
  */
 
-namespace Loraxx753\Compare_Branch;
+namespace Loraxx753\Github\Compare_Branch;
 
 /**
  * Processes the compare branch request
